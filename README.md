@@ -226,6 +226,28 @@ After that, future runs will use the saved `token.json`, so you usually will not
 
 `token.json` grants access to the YouTube API on behalf of your account. Do not publish this file.
 
+## If Authorization Stops Working After 7 Days
+
+### Why This Happens
+
+If your Google Cloud project is in `Testing` status, which is the default for personal projects, Google automatically expires OAuth2 authorization tokens after 7 days for security reasons.
+
+### 10-Second Fix
+
+Force the script to go through authorization again by deleting `token.json` from the project directory:
+
+```bash
+rm token.json
+```
+
+Then run the script as usual:
+
+```bash
+go run main.go
+```
+
+The script will see that `token.json` is missing and print a new authorization link. Open the link, choose your Google account, copy the new code, and paste it into the terminal just like you did on the first run.
+
 ## Running
 
 Normal run:
